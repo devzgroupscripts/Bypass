@@ -1,26 +1,25 @@
--- HWID kontrolü
+--================ HWID KONTROLÜ =================--
 local validHWIDs = {
-    ["9365772659"] = true
+    ["9365772659"] = true -- Buraya kendi UserId'n
 }
 
 local player = game.Players.LocalPlayer
 local hwid = player.UserId
 
 if validHWIDs[hwid] then
-  loadstring(game:HttpGet("https://raw.githubusercontent.com/devzgroupscripts/Bypass/refs/heads/main/script.lua", true))()
-else
-    
-end
-
-local player = game.Players.LocalPlayer
-local hwid = player.UserId
-
-if validHWIDs[hwid] then
     print("✅ HWID eşleşti, script çalışıyor...")
-    
-    -- Burada system.lua URL'sini direkt execute et
-    -- Eğer overflow varsa, bu sistem.lua içinde çözülmeli
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/devzgroupscripts/Bypass/refs/heads/main/system.lua", true))()
+
+    --================ SCRIPT YÜKLEME =================--
+    local success, err = pcall(function()
+        -- Tek sefer script yükle
+        local code = game:HttpGet("https://raw.githubusercontent.com/devzgroupscripts/Bypass/refs/heads/main/script.lua", true)
+        loadstring(code)()
+    end)
+
+    if not success then
+        warn("❌ Script yüklenemedi: "..err)
+    end
+
 else
     print("❌ HWID eşleşmedi, script çalıştırılmadı.")
 end
