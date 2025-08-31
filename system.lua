@@ -4,11 +4,20 @@ local validHWIDs = {
 }
 
 local player = game.Players.LocalPlayer
-local hwid = player.UserId  -- number olarak bırakıyoruz
+local hwid = player.UserId
 
 if validHWIDs[hwid] then
-    print("✅ HWID eşleşti, script çalışıyor...")
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/devzgroupscripts/Bypass/refs/heads/main/script.lua", true))()
+    print("✅ HWID eşleşti, script çalışacak...")
+    
+    -- Scripti yükle ve çalıştır
+    local success, err = pcall(function()
+        local code = game:HttpGet("https://raw.githubusercontent.com/devzgroupscripts/Bypass/refs/heads/main/system.lua", true)
+        loadstring(code)()
+    end)
+    
+    if not success then
+        warn("Script yüklenemedi: "..err)
+    end
 else
-    print("❌ HWID eşleşmedi, script çalıştırılmadı.")
+    print("❌ HWID eşleşmedi.")
 end
