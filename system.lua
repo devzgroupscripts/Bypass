@@ -1,6 +1,5 @@
 -- HWID kontrolü
 local validHWIDs = {
-    ["9356628060"] = true,
     ["9365772659"] = true
 }
 
